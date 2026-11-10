@@ -14,6 +14,7 @@ The CSV is not currently stored in this repository. Obtain it from your authoris
 - `Visual_Data_Analysis.ipynb` — visual exploration of churn-related patterns.
 - `train_model.py` — reproducible model training and evaluation pipeline.
 - `requirements.txt` — Python dependencies.
+- `app.py` — interactive Streamlit churn prediction dashboard.
 
 ## Setup
 
@@ -51,6 +52,16 @@ Outputs are written to `artifacts/`:
 The supplied 3,333-row dataset was evaluated using a stratified 80/20 split (random state 42). Random Forest achieved **93.55% accuracy**, **83.75% precision**, **69.07% recall**, **0.7571 F1**, **0.8916 ROC-AUC**, and **0.7826 average precision** for churn. Its confusion matrix was TN=557, FP=13, FN=30, TP=67. Logistic Regression achieved 0.4525 churn-class F1; the majority baseline detected no churn cases despite 85.46% accuracy.
 
 A separate five-fold stratified cross-validation of Random Forest produced mean F1 **0.8008** (std 0.0221), mean ROC-AUC **0.9112** (std 0.0253), and mean average precision **0.8541** (std 0.0278). Full rounded results are in [metrics.json](metrics.json).
+
+## Interactive dashboard
+
+After training the model, launch the dashboard:
+
+```bash
+streamlit run app.py
+```
+
+Enter a customer's account, service-plan and usage details to view the model's estimated churn probability and classification. The dashboard uses the same saved preprocessing and model pipeline produced by `train_model.py`. It does not ask for or use customer phone numbers.
 
 ## Evaluation and responsible interpretation
 
