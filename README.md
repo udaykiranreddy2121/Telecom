@@ -46,15 +46,20 @@ Outputs are written to `artifacts/`:
 - `telecom_churn_model.joblib`
 - `metrics.json`
 
+## Results from the supplied dataset
+
+The supplied 3,333-row dataset was evaluated using a stratified 80/20 split (random state 42). Random Forest achieved **93.55% accuracy**, **83.75% precision**, **69.07% recall**, **0.7571 F1**, **0.8916 ROC-AUC**, and **0.7826 average precision** for churn. Its confusion matrix was TN=557, FP=13, FN=30, TP=67. Logistic Regression achieved 0.4525 churn-class F1; the majority baseline detected no churn cases despite 85.46% accuracy.
+
+A separate five-fold stratified cross-validation of Random Forest produced mean F1 **0.8008** (std 0.0221), mean ROC-AUC **0.9112** (std 0.0253), and mean average precision **0.8541** (std 0.0278). Full rounded results are in [metrics.json](metrics.json).
+
 ## Evaluation and responsible interpretation
 
-Churn datasets can be imbalanced, so accuracy alone is not sufficient. Review churn-class precision and recall, F1, ROC-AUC and average precision together. Holdout metrics are estimates on one split; use cross-validation and an untouched future test set before making business decisions. Model predictions should support, not automatically determine, customer-retention actions.
+Churn datasets can be imbalanced, so accuracy alone is not sufficient. Review churn-class precision and recall, F1, ROC-AUC and average precision together. Holdout and cross-validation metrics are estimates on this dataset, not guarantees of future performance. Validate on newer customer data before operational use. Model predictions should support, not automatically determine, customer-retention actions.
 
 ## Current limitations
 
 - The dataset is not included; users must supply an authorised copy.
 - The training script uses a single stratified holdout split, not a full hyperparameter search.
-- No measured model performance is claimed here. Run the script on the dataset to generate actual metrics.
 - The original notebooks may contain Colab-specific file paths and saved outputs; use the training script for the reproducible workflow.
 
 ## Future improvements
